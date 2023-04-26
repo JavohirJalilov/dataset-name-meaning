@@ -37,6 +37,14 @@ def getItem(data: dict):
         "meaning": meaning
     }
 
+# write to Json
+def writeToJson(data: list, func):
+    with open('uzbNames.json', 'w') as f:
+        dataset = []
+        for item in data:
+            dataset.append(func(item))
+        json.dump(dataset, f, indent=4)
+
 def writeToCsv(data: list, func):
     with open('uzbNames.csv', 'w', newline="") as f:
         fieldbame = ["gender", "name", "origin", "meaning"]
@@ -49,5 +57,6 @@ def writeToCsv(data: list, func):
 if __name__ == "__main__":
 
     data = toDict('data.json')
+    writeToJson(data, getItem)
 
-    writeToCsv(data, getItem)
+    # writeToCsv(data, getItem)
